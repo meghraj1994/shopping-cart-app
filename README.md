@@ -72,3 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 //Readme By Meghraj
 
 step 1 : App.js contains Homepage and home page contains directory (ie list of Menu-itme) and directory contains Menu-item
+
+step 2 : I have used react router do for routing purpose
+npm add react-router-dom ---> command to install it
+
+routing can be do using match,location and history property of the props
