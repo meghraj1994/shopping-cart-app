@@ -7,7 +7,7 @@ import Header from './component/header/header-component';
 import Homepage from './pages/homepage/homepage-component';
 import ShopPage from './pages/shop/shop-component';
 
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 //testing purpose to check history,location and match
 // const TestPage = (props) => (
@@ -37,10 +37,29 @@ class App extends React.Component {
   //userName password then firebase sends message here saying authState has been changed or
   //user has updated then we get new user and it be added to currentUser
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
-      //check this in console untill user signout we can see user details
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      //if user is login get userRef
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        //listen if there is any state change
+        userRef.onSnapshot((snapShot) => {
+          this.setState(
+            {
+              currentUser: {
+                id: snapShot.id,
+                ...snapShot.data(),
+              },
+            },
+            () => {
+              console.log(this.state);
+            }
+          );
+        });
+      }
+
+      //if user is logout set current user to null because if there is not user userAuth will be null and set it to current user
+      this.setState({ currentUser: userAuth });
     });
   }
 
