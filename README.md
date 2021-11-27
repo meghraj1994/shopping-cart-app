@@ -77,3 +77,17 @@ step 2 : I have used react router do for routing purpose
 npm add react-router-dom ---> command to install it
 
 routing can be do using match,location and history property of the props
+
+---
+
+import { ReactComponent as Logo }
+
+This is a new special syntax when importing SVG in React. The ReactComponent import name is special and tells Create React App that you want a React component that renders an SVG, rather than its filename. You can read more about it here, but keep in mind that this is a React library special syntax:
+https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files
+
+**\*\*\*\***\*\*\***\*\*\*\***Google Firebase for storage and authentication **\*\***\*\
+-its a library
+
+->   npm add firebase
+
+https://firebase.google.com/?gclid=EAIaIQobChMI8LT4yZi39AIVaJBoCR0tgQWJEAAYASAAEgJCCPD_BwE&gclsrc=aw.ds
