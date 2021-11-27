@@ -4,7 +4,7 @@ import CustomButton from '../custom-button/custom-button-component';
 import FormInput from '../form-input/form-input-component';
 import './sign-in-style.scss';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -18,11 +18,19 @@ class SignIn extends React.Component {
 
   //when submitting the form we are preventing the defaul behaviour of submit button
   // to have full control over this button
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
-    //when user click submit button it get reset
-    this.setState({ email: '', password: '' });
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      //when user is logged in clear the current state
+      this.setState({ email: '', password: '' });
+    } catch (error) {
+      alert('invalid credentials');
+      console.error(error);
+    }
   };
 
   //when user is changing the value we are just setting value into name
