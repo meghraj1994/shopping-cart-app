@@ -88,6 +88,21 @@ https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files
 **\*\*\*\***\*\*\***\*\*\*\***Google Firebase for storage and authentication **\*\***\*\
 -its a library
 
-->   npm add firebase
+-> npm add firebase
 
 https://firebase.google.com/?gclid=EAIaIQobChMI8LT4yZi39AIVaJBoCR0tgQWJEAAYASAAEgJCCPD_BwE&gclsrc=aw.ds
+
+\***\*\*\*\*\***\*\***\*\*\*\*\*** Redux \***\*\*\*\*\*\*\***\*\*\*\*\***\*\*\*\*\*\*\***
+
+- the main purpose of using redux is to keep all state in one humongous object than keep in each classes and retriving state using props wherever it needed. This simplyfy the code and reduce redundany between parent and and nested child components.
+
+-Redux is insipired from Flux design pattern (Unlike MVC pattern)
+-Redux is unidirectional flow
+
+flow of REDUX is below :
+ACTION ---> MIDDLEWARE (Piece of Code) ----->ROOT REDUCER(Function which takes action as param) ----->STORE (place where states are store) then reat changes DOMS------->DOM Changes
+
+=> to install --redux-logger is middleware and react-redux is to for binding purpose`
+npm add redux redux-logger react-redux
+
+=> after installing add provider(which provider access to redux, reducre and store to application)

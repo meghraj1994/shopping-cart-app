@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { ReactComponent as Logo } from '../../assests/crown.svg';
 import './header-style.scss';
@@ -7,32 +8,33 @@ import './header-style.scss';
 import { auth } from '../../firebase/firebase.utils';
 
 const Header = ({ currentUser }) => (
-  console.log('current user is'),
-  console.log(currentUser),
-  (
-    <div className="header">
-      <Link className="logo-container" to="/">
-        <Logo className="logo" />
+  <div className="header">
+    <Link className="logo-container" to="/">
+      <Logo className="logo" />
+    </Link>
+    <div className="options">
+      <Link className="option" to="/shop">
+        SHOP
       </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
+      <Link className="option" to="/contact  ">
+        CONTACT
+      </Link>
+      {currentUser ? (
+        <div className="option" onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className="option" to="/signin">
+          SIGN IN
         </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
-        {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
-            SIGN OUT
-          </div>
-        ) : (
-          <Link className="option" to="/signin">
-            SIGN IN
-          </Link>
-        )}
-      </div>
+      )}
     </div>
-  )
+  </div>
 );
 
-export default Header;
+//currenct state is rootredux
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Header);
